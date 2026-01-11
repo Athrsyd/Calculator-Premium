@@ -25,7 +25,7 @@ function App() {
     const dy = t.clientY - touchStartY.current;
 
     // swipe kanan
-    if (dx > 60 && Math.abs(dy) < 40) {
+    if (dx < -60 && Math.abs(dy) < 40) {
       navigate("/convert");
     }
   };

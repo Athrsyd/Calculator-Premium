@@ -109,7 +109,7 @@ const KonverterMenu = () => {
     const dy = t.clientY - touchStartY.current;
 
     // swipe kiri -> balik ke kalkulator normal
-    if (dx < -60 && Math.abs(dy) < 40) {
+    if (dx > 60 && Math.abs(dy) < 40) {
       navigate("/");
     }
   };
