@@ -112,6 +112,9 @@ const KonverterMenu = () => {
     if (dx > 60 && Math.abs(dy) < 40) {
       navigate("/");
     }
+    else if (dx < -60 && Math.abs(dy) < 40) {
+      navigate("/graphic");
+    }
   };
 
   return (

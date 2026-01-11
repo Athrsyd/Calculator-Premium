@@ -13,6 +13,7 @@ import NumSystem from "./Converter/NumSystem/NumSystem.jsx";
 import Bmi from "./Converter/BMI/Bmi.jsx";
 import Volume from "./Converter/Volume/Volume.jsx";
 import Discount from "./Converter/Discount/Discount.jsx";
+import Graphic from "./Components/Graphic/Graphic.jsx";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<><Navbar /><Kalkulator /></>} />
         <Route path="/convert" element={<><Navbar /><KonverterMenu /></>} />
+        <Route path="/graphic" element={<><Navbar /><Graphic /></>} />
         <Route path="/convert/length" element={<><NavConvert title={"Konversi satuan panjang"} /> <Length/></>} />
         <Route path="/convert/mass" element={<><NavConvert title={"Konversi satuan massa"}  /> <Mass/></>} />
         <Route path="/convert/temperatur" element={<><NavConvert title={"Konversi satuan suhu"}  /> <Temperatur/></>} />
