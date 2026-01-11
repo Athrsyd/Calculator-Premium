@@ -2,7 +2,7 @@ import React from 'react'
 
 const Graphic = () => {
   return (
-    <div>Graphic</div>
+    <div className='text-center w-full'>Coming Soon</div>
   )
 }
 
