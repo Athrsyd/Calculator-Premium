@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router";
+import React, { useRef } from "react";
+import { Link, useNavigate } from "react-router";
 import { FaRuler, FaWeightHanging, FaTemperatureHigh } from "react-icons/fa";
 import { BiSolidArea } from "react-icons/bi";
 import { AiOutlineClockCircle } from "react-icons/ai";
@@ -65,8 +65,33 @@ const convertMenu = [
   },
 ];
 const KonverterMenu = () => {
+  const navigate = useNavigate();
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
+
+  const handleTouchStart = (e) => {
+    const t = e.touches[0];
+    touchStartX.current = t.clientX;
+    touchStartY.current = t.clientY;
+  };
+
+  const handleTouchEnd = (e) => {
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartX.current;
+    const dy = t.clientY - touchStartY.current;
+
+    // swipe kiri -> balik ke kalkulator normal
+    if (dx < -60 && Math.abs(dy) < 40) {
+      navigate("/");
+    }
+  };
+
   return (
-    <div className=" flex items-center justify-center mt-10">
+    <div
+      className=" flex items-center justify-center mt-10"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       <div className="buttons grid grid-cols-3 gap-4">
         {convertMenu.map((item) => (
           <Link key={item.id} to={item.linkDestination}>

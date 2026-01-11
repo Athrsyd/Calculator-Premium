@@ -1,12 +1,34 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDeleteLeft } from "@fortawesome/free-solid-svg-icons";
 import { PiSwapBold } from "react-icons/pi";
 
 function App() {
+  const navigate = useNavigate();
   const [value, setValue] = useState("");
   const [isAdvance, setIsAdvance] = useState(false);
+
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
+
+  const handleTouchStart = (e) => {
+    const t = e.touches[0];
+    touchStartX.current = t.clientX;
+    touchStartY.current = t.clientY;
+  };
+
+  const handleTouchEnd = (e) => {
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartX.current;
+    const dy = t.clientY - touchStartY.current;
+
+    // swipe kanan
+    if (dx > 60 && Math.abs(dy) < 40) {
+      navigate("/convert");
+    }
+  };
 
   const logBase = (x, base = 10) => {
     return Math.log(x) / Math.log(base);
@@ -24,9 +46,14 @@ function App() {
       setValue("Error...");
     }
   };
+
   return (
     <>
-      <div className="container w-full h-auto  mt-15 flex flex-col justify-center items-center gap-5 bg-primary">
+      <div
+        className="container w-full h-auto  mt-15 flex flex-col justify-center items-center gap-5 bg-primary"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         <div className="Kalkulator bg-primary border rounded-xl h-7/10 w-[90%] flex flex-col justify-center items-center gap-5 p-5">
           <div className="output flex justify-center items-center h-1/2 w-full">
             <input
