@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDeleteLeft } from "@fortawesome/free-solid-svg-icons";
@@ -47,191 +47,119 @@ function App() {
     }
   };
 
+  // Neumorphism button base class
+  const neuBtnBase = `
+    w-full aspect-square rounded-2xl font-semibold text-xl sm:text-2xl
+    transition-all duration-200 ease-out
+    bg-primary
+    shadow-neu-btn
+    hover:scale-[1.02] active:scale-[0.98]
+    active:shadow-neu-btn-pressed
+  `;
+
+  const neuBtnNumber = `${neuBtnBase} text-text-dark dark:text-text`;
+  const neuBtnOperator = `${neuBtnBase} text-text`;
+  const neuBtnSpecial = `${neuBtnBase} text-secondary dark:text-text`;
+  const neuBtnEqual = `${neuBtnBase} bg-tertiary dark:bg-btn-equal text-white`;
+
   return (
-    <>
-      <div
-        className="container w-full h-auto  mt-15 flex flex-col justify-center items-center gap-5 bg-primary"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-      >
-        <div className="Kalkulator bg-primary border rounded-xl h-7/10 w-[90%] flex flex-col justify-center items-center gap-5 p-5">
-          <div className="output flex justify-center items-center h-1/2 w-full">
+    <div
+      className="min-h-[calc(100vh-76px)] w-full px-4 py-6 bg-primary transition-colors duration-300 animate-fadeIn"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
+      <div className="max-w-sm mx-auto flex flex-col gap-6">
+        {/* Display */}
+        <div className="w-full p-6 rounded-3xl bg-primary shadow-neu-pressed">
+          <div className="text-right">
+            <p className="text-sm text-text-muted mb-1 h-5">
+              {isAdvance ? "Mode Lanjutan" : "Mode Standar"}
+            </p>
             <input
               type="text"
               value={value}
               disabled
-              className=" bg-white/85 rounded-xl flex-1 w-70 h-1/3 shadow-lg text-amber-700 text-3xl p-5 text-end font-bold "
+              placeholder="0"
+              className="w-full bg-transparent text-right text-4xl sm:text-5xl font-bold 
+                        text-text-dark dark:text-text display-number
+                        outline-none border-none"
             />
           </div>
-          <div className="tombols h-3/4 w-full flex flex-col justify-center items-center gap-3">
-            <div className="row1 w-full flex justify-between items-center">
-              <input
-                type="button"
-                value="C"
-                onClick={() => setValue("")}
-                className="w-1/5 bg-amber-50 rounded-xl h-13 text-amber-700 font-bold text-3xl"
-              />
-              <button
-                className="w-1/5 bg-amber-50 rounded-xl h-13 text-amber-700 font-bold text-3xl"
-                onClick={() => setValue(value.slice(0, -1))}
-              >
-                <FontAwesomeIcon icon={faDeleteLeft} />
-              </button>
-              <input
-                type="button"
-                value={!isAdvance ? "%" : "π"}
-                onClick={() =>
-                  !isAdvance ? setValue(value * 0.01) : setValue(value + 3.14)
-                }
-                className="w-1/5 bg-amber-50 rounded-xl h-13 text-amber-700 font-bold text-3xl"
-              />
-              <input
-                type="button"
-                value={!isAdvance ? "÷" : "^"}
-                onClick={(e) => {
-                  setValue(value + e.target.value);
-                }}
-                className="w-1/5 bg-amber-50 rounded-xl h-13 text-amber-700 font-bold pb-1 text-3xl"
-              />
-            </div>
-            <div className="row2 w-full flex justify-between items-center">
-              <input
-                type="button"
-                onClick={(e) => {
-                  setValue(value + e.target.value);
-                }}
-                value="7"
-                className="w-1/5 bg-amber-50 rounded-xl h-13 text-amber-700 font-bold text-3xl"
-              />
-              <input
-                type="button"
-                onClick={(e) => {
-                  setValue(value + e.target.value);
-                }}
-                value="8"
-                className="w-1/5 bg-amber-50 rounded-xl h-13 text-amber-700 font-bold text-3xl"
-              />
-              <input
-                type="button"
-                onClick={(e) => {
-                  setValue(value + e.target.value);
-                }}
-                value="9"
-                className="w-1/5 bg-amber-50 rounded-xl h-13 text-amber-700 font-bold text-3xl"
-              />
-              <input
-                type="button"
-                onClick={(e) => {
-                  setValue(value + e.target.value);
-                }}
-                value={!isAdvance ? "x" : "("}
-                className="w-1/5 bg-amber-50 rounded-xl h-13 text-amber-700 font-bold text-3xl"
-              />
-            </div>
-            <div className="row3 w-full flex justify-between items-center">
-              <input
-                type="button"
-                onClick={(e) => {
-                  setValue(value + e.target.value);
-                }}
-                value="4"
-                className="w-1/5 bg-amber-50 rounded-xl h-13 text-amber-700 font-bold text-3xl"
-              />
-              <input
-                type="button"
-                onClick={(e) => {
-                  setValue(value + e.target.value);
-                }}
-                value="5"
-                className="w-1/5 bg-amber-50 rounded-xl h-13 text-amber-700 font-bold text-3xl"
-              />
-              <input
-                type="button"
-                onClick={(e) => {
-                  setValue(value + e.target.value);
-                }}
-                value="6"
-                className="w-1/5 bg-amber-50 rounded-xl h-13 text-amber-700 font-bold text-3xl"
-              />
-              <input
-                type="button"
-                onClick={(e) => {
-                  setValue(value + e.target.value);
-                }}
-                value={!isAdvance ? "-" : ")"}
-                className="w-1/5 bg-amber-50 rounded-xl h-13 text-amber-700 font-bold text-3xl"
-              />
-            </div>
-            <div className="row5 w-full flex justify-between items-center">
-              <input
-                type="button"
-                onClick={(e) => {
-                  setValue(value + e.target.value);
-                }}
-                value="1"
-                className="w-1/5 bg-amber-50 rounded-xl h-13 text-amber-700 font-bold text-3xl"
-              />
-              <input
-                type="button"
-                onClick={(e) => {
-                  setValue(value + e.target.value);
-                }}
-                value="2"
-                className="w-1/5 bg-amber-50 rounded-xl h-13 text-amber-700 font-bold text-3xl"
-              />
-              <input
-                type="button"
-                onClick={(e) => {
-                  setValue(value + e.target.value);
-                }}
-                value="3"
-                className="w-1/5 bg-amber-50 rounded-xl h-13 text-amber-700 font-bold text-3xl"
-              />
-              <input
-                type="button"
-                value={!isAdvance ? "+" : "lg"}
-                onClick={(e) => {
-                  !isAdvance
-                    ? setValue(value + e.target.value)
-                    : setValue(value + "lg(");
-                }}
-                className="w-1/5 bg-amber-50 rounded-xl h-13 text-amber-700 font-bold text-3xl"
-              />
-            </div>
-            <div className="row5 w-full flex justify-between items-center">
-              <button
-                className="w-1/5 text-center flex justify-center items-center bg-amber-50 rounded-xl h-13 text-amber-700 font-bold text-3xl"
-                onClick={() => setIsAdvance(!isAdvance)}
-              >
-                <PiSwapBold />
-              </button>
-              <input
-                type="button"
-                onClick={(e) => {
-                  setValue(value + e.target.value);
-                }}
-                value="0"
-                className="w-1/5 bg-amber-50 rounded-xl h-13 text-amber-700 font-bold text-3xl"
-              />
-              <input
-                type="button"
-                onClick={(e) => {
-                  setValue(value + e.target.value);
-                }}
-                value={!isAdvance ? "." : ","}
-                className="w-1/5 bg-amber-50 rounded-xl h-13 text-amber-700 font-bold text-3xl"
-              />
-              <input
-                type="button"
-                onClick={() => calculate()}
-                value="="
-                className="w-1/5 bg-amber-50 rounded-xl h-13 text-amber-700 font-bold text-3xl"
-              />
-            </div>
-          </div>
         </div>
+
+        {/* Keypad */}
+        <div className="grid grid-cols-4 gap-3 sm:gap-4">
+          {/* Row 1 */}
+          <button onClick={() => setValue("")} className={neuBtnSpecial}>C</button>
+          <button onClick={() => setValue(value.slice(0, -1))} className={neuBtnSpecial}>
+            <FontAwesomeIcon icon={faDeleteLeft} />
+          </button>
+          <button
+            onClick={() => !isAdvance ? setValue(value * 0.01) : setValue(value + "3.14")}
+            className={neuBtnOperator}
+          >
+            {!isAdvance ? "%" : "π"}
+          </button>
+          <button
+            onClick={() => setValue(value + (!isAdvance ? "÷" : "^"))}
+            className={neuBtnOperator}
+          >
+            {!isAdvance ? "÷" : "^"}
+          </button>
+
+          {/* Row 2 */}
+          <button onClick={() => setValue(value + "7")} className={neuBtnNumber}>7</button>
+          <button onClick={() => setValue(value + "8")} className={neuBtnNumber}>8</button>
+          <button onClick={() => setValue(value + "9")} className={neuBtnNumber}>9</button>
+          <button
+            onClick={() => setValue(value + (!isAdvance ? "x" : "("))}
+            className={neuBtnOperator}
+          >
+            {!isAdvance ? "×" : "("}
+          </button>
+
+          {/* Row 3 */}
+          <button onClick={() => setValue(value + "4")} className={neuBtnNumber}>4</button>
+          <button onClick={() => setValue(value + "5")} className={neuBtnNumber}>5</button>
+          <button onClick={() => setValue(value + "6")} className={neuBtnNumber}>6</button>
+          <button
+            onClick={() => setValue(value + (!isAdvance ? "-" : ")"))}
+            className={neuBtnOperator}
+          >
+            {!isAdvance ? "−" : ")"}
+          </button>
+
+          {/* Row 4 */}
+          <button onClick={() => setValue(value + "1")} className={neuBtnNumber}>1</button>
+          <button onClick={() => setValue(value + "2")} className={neuBtnNumber}>2</button>
+          <button onClick={() => setValue(value + "3")} className={neuBtnNumber}>3</button>
+          <button
+            onClick={() => !isAdvance ? setValue(value + "+") : setValue(value + "lg(")}
+            className={neuBtnOperator}
+          >
+            {!isAdvance ? "+" : "lg"}
+          </button>
+
+          {/* Row 5 */}
+          <button onClick={() => setIsAdvance(!isAdvance)} className={neuBtnSpecial}>
+            <PiSwapBold className="mx-auto text-2xl" />
+          </button>
+          <button onClick={() => setValue(value + "0")} className={neuBtnNumber}>0</button>
+          <button
+            onClick={() => setValue(value + (!isAdvance ? "." : ","))}
+            className={neuBtnNumber}
+          >
+            {!isAdvance ? "." : ","}
+          </button>
+          <button onClick={() => calculate()} className={neuBtnEqual}>=</button>
+        </div>
+
+        {/* Swipe hint */}
+        <p className="text-center text-xs text-text-muted mt-2">
+          Geser ke kanan untuk Konverter →
+        </p>
       </div>
-    </>
+    </div>
   );
 }
 
