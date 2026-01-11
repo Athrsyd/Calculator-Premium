@@ -1,0 +1,36 @@
+@import 'tailwindcss';
+
+/* Tailwind v4 CSS-first theming */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    /* Light mode colors */
+    --color-primary: #F6F1E9;
+    --color-secondary: #FFD93D;
+    --color-tertiary: #FF8400;
+    --color-text: #F86F03;
+    --color-btn: #E8E2D9;
+    --color-btn-op: #D4C4E0;
+    --color-btn-equal: #8B5CF6;
+    --color-text-muted: #9CA3AF;
+}
+
+/* Dark mode - override same variables */
+.dark {
+    --color-primary: #404258;
+    --color-secondary: #474E68;
+    --color-tertiary: #50577A;
+    --color-text: #6B728E;
+    --color-btn: #4A4E69;
+    --color-btn-op: #5B4B6E;
+    --color-btn-equal: #7C3AED;
+    --color-text-muted: #6B7280;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+*::-webkit-scrollbar{
+    display: none;
+}

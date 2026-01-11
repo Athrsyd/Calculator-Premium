@@ -1,0 +1,11 @@
+Dark Mode :
+Primery #404258
+Secondary #474E68
+Tersier #50577A
+Text-color #6B728E
+
+Ligth mode :
+Primery #F6F1E9
+Secondary #FFD93D
+Tersier #FF8400
+Text-color #F86F03
