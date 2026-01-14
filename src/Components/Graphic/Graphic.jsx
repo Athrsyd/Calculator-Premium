@@ -23,7 +23,9 @@ const Graphic = () => {
     }
   };
   return (
-    <div className='w-full h-screen'>Coming Soon</div>
+    <div className='w-full h-130 text-center flex justify-center items-center text-2xl font-semibold'
+    onTouchStart={handleTouchStart}
+    onTouchEnd={handleTouchEnd}>Coming Soon</div>
   )
 }
 

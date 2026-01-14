@@ -4,7 +4,7 @@ import ThemeButton from "../ThemeButton/ThemeButton";
 import { FaCalculator } from "react-icons/fa";
 import { HiOutlineSwitchHorizontal } from "react-icons/hi";
 import { useState } from "react";
-import { TbGeometry } from "react-icons/tb";
+import { GiDiagram } from "react-icons/gi";
 
 const Navbar = () => {
   const location = useLocation();
@@ -24,11 +24,10 @@ const Navbar = () => {
             <button
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-sm
                          transition-all duration-300 ease-out
-                         ${
-                           isCalculator
-                             ? "bg-primary text-tertiary shadow-neu-btn dark:shadow-neu-btn"
-                             : "text-text-dark/60 dark:text-text/60 hover:text-tertiary"
-                         }`}
+                         ${isCalculator
+                  ? "bg-primary text-tertiary shadow-neu-btn dark:shadow-neu-btn"
+                  : "text-text-dark/60 dark:text-text/60 hover:text-tertiary"
+                }`}
             >
               <FaCalculator className="text-lg" />
               <span className="hidden sm:inline">Kalkulator</span>
@@ -38,11 +37,10 @@ const Navbar = () => {
             <button
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-sm
                          transition-all duration-300 ease-out
-                         ${
-                           isConverter
-                             ? "bg-primary text-tertiary shadow-neu-btn dark:shadow-neu-btn"
-                             : "text-text-dark/60 dark:text-text/60 hover:text-tertiary"
-                         }`}
+                         ${isConverter
+                  ? "bg-primary text-tertiary shadow-neu-btn dark:shadow-neu-btn"
+                  : "text-text-dark/60 dark:text-text/60 hover:text-tertiary"
+                }`}
             >
               <HiOutlineSwitchHorizontal className="text-lg" />
               <span className="hidden sm:inline">Konverter</span>
@@ -52,13 +50,12 @@ const Navbar = () => {
             <button
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-sm
                          transition-all duration-300 ease-out
-                         ${
-                           isGraphic
-                             ? "bg-primary text-tertiary shadow-neu-btn dark:shadow-neu-btn"
-                             : "text-text-dark/60 dark:text-text/60 hover:text-tertiary"
-                         }`}
+                         ${isGraphic
+                  ? "bg-primary text-tertiary shadow-neu-btn dark:shadow-neu-btn"
+                  : "text-text-dark/60 dark:text-text/60 hover:text-tertiary"
+                }`}
             >
-              <TbGeometry className="text-lg" />
+              <Gi className="text-lg" />
               <span className="hidden sm:inline">Grafik</span>
             </button>
           </Link>
