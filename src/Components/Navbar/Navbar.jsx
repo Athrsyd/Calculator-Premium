@@ -55,7 +55,7 @@ const Navbar = () => {
                   : "text-text-dark/60 dark:text-text/60 hover:text-tertiary"
                 }`}
             >
-              <Gi className="text-lg" />
+              <GiDiagram className="text-lg" />
               <span className="hidden sm:inline">Grafik</span>
             </button>
           </Link>
