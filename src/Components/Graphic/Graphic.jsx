@@ -1,4 +1,5 @@
-import {useNavigate} from 'react'
+import {useNavigate} from 'react-router'
+import {useRef} from 'react'
 
 const Graphic = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const Graphic = () => {
     }
   };
   return (
-    <div className='text-center w-full'>Coming Soon</div>
+    <div className='w-full h-screen'>Coming Soon</div>
   )
 }
 
