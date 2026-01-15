@@ -46,6 +46,7 @@ const Navbar = () => {
               <span className="hidden sm:inline">Konverter</span>
             </button>
           </Link>
+          
           <Link to="/graphic">
             <button
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-sm

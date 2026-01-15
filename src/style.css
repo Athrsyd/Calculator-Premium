@@ -175,3 +175,31 @@ input:focus, select:focus {
     font-weight: 600;
     letter-spacing: -0.02em;
 }
+
+/* Graphic Chart Styles */
+.grafik-utama .recharts-cartesian-grid line {
+    stroke: #e5e7eb;
+}
+
+.dark .grafik-utama .recharts-cartesian-grid line {
+    stroke: #374151;
+}
+
+.dark .grafik-utama .recharts-text {
+    fill: #9ca3af;
+}
+
+.grafik-utama .recharts-tooltip-wrapper .recharts-default-tooltip {
+    border-radius: 12px !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.dark .grafik-utama .recharts-tooltip-wrapper .recharts-default-tooltip {
+    background-color: #374151 !important;
+    border-color: #4b5563 !important;
+}
+
+.dark .grafik-utama .recharts-tooltip-wrapper .recharts-default-tooltip .recharts-tooltip-label,
+.dark .grafik-utama .recharts-tooltip-wrapper .recharts-default-tooltip .recharts-tooltip-item {
+    color: #e5e7eb !important;
+}

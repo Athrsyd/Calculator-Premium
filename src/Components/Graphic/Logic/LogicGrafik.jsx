@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 
-const LogicGrafik = () => {
-  const [a, setA] = useState(1);
-  const [b, setB] = useState(0);
-  const [c, setC] = useState(-4);
+const LogicGrafik = (initA = 1, initB = 0, initC = 0) => {
+  const [a, setA] = useState(initA);
+  const [b, setB] = useState(initB);
+  const [c, setC] = useState(initC);
   const [zoomLevel, setZoomLevel] = useState(1);
   const [graphData, setGraphData] = useState([]);
   const [analysis, setAnalysis] = useState(null);
@@ -87,8 +87,9 @@ const LogicGrafik = () => {
     const arahParabola = a > 0 ? "membuka keatas" : "membuka kebawah";
     const jenisPuncak = a > 0 ? "minimum" : "maximun";
     const sumbuSimetri = titikPuncak.x;
-    const range =
-      a > 0 ? `y ≥ ${titikPuncak.y.toFixed(2)}` : `y ≤ ${titikPuncak.y.toFixed(2)}`;
+    const range = a > 0 
+      ? `y ≥ ${titikPuncak.y.toFixed(2)}` 
+      : `y ≤ ${titikPuncak.y.toFixed(2)}`;
 
     return {
       titikPuncak,
@@ -188,12 +189,15 @@ const LogicGrafik = () => {
 
 
   const handleChangeInput = (koefisien, value) => {
-    const numValue = parseFloat(value) || 0;
-
-    if (koefisien === "a" && numValue === 0) {
-      alert("Koefisien a tidak boleh 0 ! ( Harus fungsi kuadrat)");
+    if (value === "" || value === "-") {
+      if (koefisien === "a") setA(value);
+      if (koefisien === "b") setB(value);
+      if (koefisien === "c") setC(value);
       return;
     }
+
+    const numValue = Number(value);
+    if (!Number.isFinite(numValue)) return;
 
     if (koefisien === "a") setA(numValue);
     if (koefisien === "b") setB(numValue);
