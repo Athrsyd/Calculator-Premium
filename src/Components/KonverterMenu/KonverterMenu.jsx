@@ -167,6 +167,9 @@ const KonverterMenu = () => {
         <p className="text-center text-xs text-text-muted mt-6">
           ← Geser ke kiri untuk Kalkulator
         </p>
+        <p className="text-center text-xs text-text-muted mt-6">
+          Geser ke kanan untuk fungsi kuadrat →
+        </p>
       </div>
     </div>
   );
