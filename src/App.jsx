@@ -14,6 +14,7 @@ import Bmi from "./Converter/BMI/Bmi.jsx";
 import Volume from "./Converter/Volume/Volume.jsx";
 import Discount from "./Converter/Discount/Discount.jsx";
 import Graphic from "./Components/Graphic/Graphic.jsx";
+import Footer from "./Components/Footer/Footer.jsx";
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
         <Route path="/convert/volume" element={<><NavConvert title={"Konversi satuan volume"} /> <Volume/></>} />
         <Route path="/convert/discount" element={<><NavConvert title={"Kalkulator potongan harga"} /> <Discount/></>} />
       </Routes>
+      <Footer />
     </>
   );
 };

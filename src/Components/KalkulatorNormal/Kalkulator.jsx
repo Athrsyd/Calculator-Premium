@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, use } from "react";
 import { useNavigate } from "react-router";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,6 +9,7 @@ function App() {
   const navigate = useNavigate();
   const [value, setValue] = useState("");
   const [isAdvance, setIsAdvance] = useState(false);
+  const [isMultipleSeven,setIsMultipleSeven] = useState(false);
 
   const touchStartX = useRef(0);
   const touchStartY = useRef(0);
@@ -34,19 +35,48 @@ function App() {
     return Math.log(x) / Math.log(base);
   };
 
+  useEffect(() => {
+    changePi();
+  }, [value]);
+
   const calculate = () => {
     try {
       const hasil = value
         .replaceAll("x", "*")
         .replaceAll("^", "**")
         .replaceAll("÷", "/")
-        .replaceAll("lg(", "logBase(");
+        .replaceAll("lg(", "logBase(")
+        .replaceAll("π", !isMultipleSeven?Math.PI:"22/7");
       setValue(String(eval(hasil)));
     } catch {
       setValue("Error...");
+      console.log(value);
     }
   };
 
+  const changePi = () => {
+    if (value){
+      const numbers = value.match(/\d+(\.\d+)?/g);
+
+      if(numbers){
+        const hasMultipleOfSeven = numbers.some(num =>{
+          const parsed = parseFloat(num);
+          return parsed % 7 === 0 && parsed !== 0;
+        }) 
+        setIsMultipleSeven(hasMultipleOfSeven);
+      } else {
+        setIsMultipleSeven (false);
+      }
+    }
+  }
+
+  const changePiOnClick = () => {
+    if (!isMultipleSeven) {
+      setValue(value + "π");
+    } else {
+      setValue(value + "22/7");
+    }
+  }
   // Neumorphism button base class
   const neuBtnBase = `
     w-full aspect-square rounded-2xl font-semibold text-xl sm:text-2xl
@@ -95,46 +125,46 @@ function App() {
             <FontAwesomeIcon icon={faDeleteLeft} />
           </button>
           <button
-            onClick={() => !isAdvance ? setValue(value * 0.01) : setValue(value + "3.14")}
+            onClick={() => !isAdvance ? setValue(value * 0.01) : setValue(value + "π ")}
             className={neuBtnOperator}
           >
             {!isAdvance ? "%" : "π"}
           </button>
           <button
-            onClick={() => setValue(value + (!isAdvance ? "÷" : "^"))}
+            onClick={() => setValue(value + (!isAdvance ? "÷ " : "^ "))}
             className={neuBtnOperator}
           >
             {!isAdvance ? "÷" : "^"}
           </button>
 
           {/* Row 2 */}
-          <button onClick={() => setValue(value + "7")} className={neuBtnNumber}>7</button>
-          <button onClick={() => setValue(value + "8")} className={neuBtnNumber}>8</button>
-          <button onClick={() => setValue(value + "9")} className={neuBtnNumber}>9</button>
+          <button onClick={() => setValue(value + "7 ")} className={neuBtnNumber}>7</button>
+          <button onClick={() => setValue(value + "8 ")} className={neuBtnNumber}>8</button>
+          <button onClick={() => setValue(value + "9 ")} className={neuBtnNumber}>9</button>
           <button
-            onClick={() => setValue(value + (!isAdvance ? "x" : "("))}
+            onClick={() => setValue(value + (!isAdvance ? "x " : "( "))}
             className={neuBtnOperator}
           >
             {!isAdvance ? "×" : "("}
           </button>
 
           {/* Row 3 */}
-          <button onClick={() => setValue(value + "4")} className={neuBtnNumber}>4</button>
-          <button onClick={() => setValue(value + "5")} className={neuBtnNumber}>5</button>
-          <button onClick={() => setValue(value + "6")} className={neuBtnNumber}>6</button>
+          <button onClick={() => setValue(value + "4 ")} className={neuBtnNumber}>4</button>
+          <button onClick={() => setValue(value + "5 ")} className={neuBtnNumber}>5</button>
+          <button onClick={() => setValue(value + "6 ")} className={neuBtnNumber}>6</button>
           <button
-            onClick={() => setValue(value + (!isAdvance ? "-" : ")"))}
+            onClick={() => setValue(value + (!isAdvance ? "- " : ") "))}
             className={neuBtnOperator}
           >
             {!isAdvance ? "−" : ")"}
           </button>
 
           {/* Row 4 */}
-          <button onClick={() => setValue(value + "1")} className={neuBtnNumber}>1</button>
-          <button onClick={() => setValue(value + "2")} className={neuBtnNumber}>2</button>
-          <button onClick={() => setValue(value + "3")} className={neuBtnNumber}>3</button>
+          <button onClick={() => setValue(value + "1 ")} className={neuBtnNumber}>1</button>
+          <button onClick={() => setValue(value + "2 ")} className={neuBtnNumber}>2</button>
+          <button onClick={() => setValue(value + "3 ")} className={neuBtnNumber}>3</button>
           <button
-            onClick={() => !isAdvance ? setValue(value + "+") : setValue(value + "lg(")}
+            onClick={() => !isAdvance ? setValue(value + "+ ") : setValue(value + "lg( ")}
             className={neuBtnOperator}
           >
             {!isAdvance ? "+" : "lg"}
@@ -144,7 +174,7 @@ function App() {
           <button onClick={() => setIsAdvance(!isAdvance)} className={neuBtnSpecial}>
             <PiSwapBold className="mx-auto text-2xl" />
           </button>
-          <button onClick={() => setValue(value + "0")} className={neuBtnNumber}>0</button>
+          <button onClick={() => setValue(value + "0 ")} className={neuBtnNumber}>0</button>
           <button
             onClick={() => setValue(value + (!isAdvance ? "." : ","))}
             className={neuBtnNumber}
