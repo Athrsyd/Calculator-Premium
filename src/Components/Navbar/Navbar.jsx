@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
     <nav className="sticky  top-0 z-50 w-full px-4 py-3 bg-primary/10 backdrop-blur-lg drop-shadow-2xl transition-colors duration-300">
-      <div className="max-w-1/2 mx-auto flex items-center justify-between">
+      <div className="max-w-lg mx-auto flex items-center justify-between">
         {/* Navigation Tabs */}
         <div
           className="flex gap-2 p-1.5 rounded-2xl bg-primary
