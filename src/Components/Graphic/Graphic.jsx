@@ -342,6 +342,31 @@ const Graphic = () => {
                     </p>
                   )}
                 </div>
+
+
+
+                <div className="p-4 rounded-2xl bg-primary shadow-neu-pressed dark:shadow-neu-pressed">
+                  <label className="text-xs font-medium text-text-muted block mb-1">Titik Potong</label>
+                  {analysis.akarAkarPenyelesaian.tipe === "dua" && (
+                    <p className="text-lg font-bold text-red-500">
+                      x<sub>1</sub> = {`(${analysis.akarAkarPenyelesaian.akarAkar[0]},0)`} ; x<sub>2</sub> = {`(${analysis.akarAkarPenyelesaian.akarAkar[1]},0)`} <br />
+                      y = (0,{analysis.titikPotongY})
+                    </p>
+                  )}
+                  {analysis.akarAkarPenyelesaian.tipe === "satu" && (
+                    <p className="text-lg font-bold text-red-500">
+                      x<sub>1</sub> = {`(${analysis.akarAkarPenyelesaian.akarAkar[0]},0)`} ; x<sub>2</sub> = (0,0) <br />
+
+                      y = (0,{analysis.titikPotongY})
+                    </p>
+                  )}
+                  {analysis.akarAkarPenyelesaian.tipe === "none" && (
+                    <p className="text-lg font-bold text-red-500">
+                      x = Tidak ada titik potong dengan sumbu x <br />
+                      y = (0,{analysis.titikPotongY})
+                    </p>
+                  )}
+                </div>
               </div>
             )}
           </div>
